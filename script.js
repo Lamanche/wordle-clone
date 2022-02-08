@@ -24,11 +24,11 @@ function startGame() {
 }
 
 /*function stopGame() {
-  document.removeEventListener("keydown");
+  document.removeEventListener("keydown" .....);
 
   document
     .querySelectorAll(".key")
-    .forEach((key) => key.removeEventListener("click"));
+    .forEach((key) => key.removeEventListener("click" ......));
 }*/
 
 function pressedKeyOnKeyboard(e) {
@@ -186,5 +186,5 @@ function clearTable() {
     });
   }, 1200);
 
- //console.log(selectedLetters);
+ 
 }
