@@ -28,7 +28,9 @@
 
 body {
   display: flex;
+  position: relative;
   flex-direction: column;
+  align-items: center;
   height: 100vh;
   padding: 1em;
   font-size: clamp(0.5rem, 2.5vmin, 1.5rem);
@@ -162,7 +164,9 @@ body {
 }
 
 .header {
+  position: relative;
   min-height: 2.5em;
+  width: 30em;
   border-bottom: var(--gray) solid 0.05em;
   color: white;
   display: flex;
@@ -174,6 +178,63 @@ body {
   font-size: 2em;
   text-transform: uppercase;
   letter-spacing: 0.25em;
+}
+
+.statistics-btn {
+  position: absolute;
+  right: 0.25em;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.stats-container {
+  position: absolute;
+  height: 14em;
+  width: 24em;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 0.5em;
+  background-color: var(--color-tone-6);
+  color: white;
+  visibility: hidden;
+  z-index: 40;
+  opacity: 0;
+  transition: all 150ms ease-in-out;
+}
+
+.stats-open {
+  display: block;
+  visibility: visible;
+  top: 30%;
+  opacity: 1;
+}
+
+.close-stats-btn {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 20;
+  background-color: black;
+  opacity: 0.7;
+  display: none;
+}
+
+.overlay-visible {
+  display: block;
 }
 
 .message-container {
@@ -191,6 +252,7 @@ body {
   margin-bottom: 0.5em;
   background-color: var(--color-tone-1);
   border-radius: 0.25em;
+  font-size: 1.4em;
   animation: dissapear 1500ms;
 }
 

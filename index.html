@@ -9,11 +9,22 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="overlay"></div>
     <header class="header">
-        <h1 class="header-text">Wordle</h1>        
+        <button class="retry-btn">0</button>
+        <h1 class="header-text">Wordle</h1>
+        <button class="statistics-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                <path fill="var(--color-tone-3)" d="M16,11V3H8v6H2v12h20V11H16z M10,5h4v14h-4V5z M4,11h4v8H4V11z M20,19h-4v-6h4V19z"></path>
+              </svg>
+        </button>     
     </header>
 
     <div class="message-container"></div>
+
+    <div class="stats-container">
+        <button class="close-stats-btn">X</button>
+    </div>
 
     <div class="tiles-container">
         <div data-tile-active="false" class="tile"></div>
@@ -70,13 +81,13 @@
         <button class="key" data-key="K">K</button>
         <button class="key" data-key="L">L</button>
         <button class="key large" data-key="ENTER">Enter</button>
-        <button class="key" data-key="P">Q</button>
-        <button class="key" data-key="P">Q</button>
-        <button class="key" data-key="P">Q</button>
-        <button class="key" data-key="P">Q</button>
-        <button class="key" data-key="P">Q</button>
-        <button class="key" data-key="P">Q</button>
-        <button class="key" data-key="P">Q</button>
+        <button class="key" data-key="Z">Z</button>
+        <button class="key" data-key="X">X</button>
+        <button class="key" data-key="C">C</button>
+        <button class="key" data-key="V">V</button>
+        <button class="key" data-key="B">B</button>
+        <button class="key" data-key="N">N</button>
+        <button class="key" data-key="M">M</button>
         <button class="key large" data-key="DELETE">Delete</button>
     </div>
 </body>
