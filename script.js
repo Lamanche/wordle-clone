@@ -13069,7 +13069,7 @@ function openStats() {
   document
     .querySelector(".flip-stats-btn")
     .addEventListener("click", flipStats);
-  
+
   document
     .querySelector(".flip-players-btn")
     .addEventListener("click", flipStats);
@@ -13097,10 +13097,14 @@ function closeStats() {
   unFreezeKeyboard();
 }
 
-function flipStats() {
+export function flipStats() {
   const container = document.querySelector(".stats-container");
   const players = document.querySelector(".players-side");
   const stats = document.querySelector(".stats-side");
+
+  const input = document.querySelector(".name-input");
+  input.classList.remove("input-open");
+  input.value = "";
 
   container.classList.add("flip-stats");
 
