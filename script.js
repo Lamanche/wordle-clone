@@ -12989,7 +12989,7 @@ function startGame() {
   loadData();
 
   document.addEventListener("keydown", pressedKeyOnKeyboard);
-  
+
   document.querySelectorAll(".key").forEach((key) =>
     key.addEventListener("click", (e) => {
       const letter = e.target.dataset.key;
@@ -13004,10 +13004,14 @@ function startGame() {
       pushSelectedLetter(letter);
     })
   );
-  
-  document.querySelector(".statistics-btn").addEventListener("click", openStats);
 
-  document.querySelector(".close-stats-btn").addEventListener("click", closeStats);
+  document
+    .querySelector(".statistics-btn")
+    .addEventListener("click", openStats);
+
+  document
+    .querySelector(".close-stats-btn")
+    .addEventListener("click", closeStats);
 
   document.querySelector(".overlay").addEventListener("click", closeStats);
 

@@ -23,25 +23,24 @@ document
   .addEventListener("click", addNewPlayer);
 
 export function showPlayerData() {
-  if (playerData?.currentPlayer > 0) {
-    document.querySelector(".current-player-name").textContent =
-      playerData[playerData.currentPlayer]?.name;
+  if (playerData?.currentPlayer == 0 || playerData == null) {
+    document.querySelector(".current-player-name").textContent = "No players";
 
-    document.querySelector(".wins").textContent =
-      playerData[playerData.currentPlayer]?.wins;
-
-    document.querySelector(".losses").textContent =
-      playerData[playerData.currentPlayer]?.losses;
+    return;
   }
-
   document.querySelector(".current-player-name").textContent =
-    'No players'
+    playerData[playerData.currentPlayer]?.name;
+
+  document.querySelector(".wins").textContent =
+    playerData[playerData.currentPlayer]?.wins;
+
+  document.querySelector(".losses").textContent =
+    playerData[playerData.currentPlayer]?.losses;
 
   return;
 }
 
 function addNewPlayer() {
-  
   if (playerData.playerCount >= 5) {
     return console.log("Max 5 players");
   }
