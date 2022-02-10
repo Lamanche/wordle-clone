@@ -12989,6 +12989,7 @@ function startGame() {
   loadData();
 
   document.addEventListener("keydown", pressedKeyOnKeyboard);
+  
   document.querySelectorAll(".key").forEach((key) =>
     key.addEventListener("click", (e) => {
       const letter = e.target.dataset.key;
@@ -13003,13 +13004,10 @@ function startGame() {
       pushSelectedLetter(letter);
     })
   );
-  document
-    .querySelector(".statistics-btn")
-    .addEventListener("click", openStats);
+  
+  document.querySelector(".statistics-btn").addEventListener("click", openStats);
 
-  document
-    .querySelector(".close-stats-btn")
-    .addEventListener("click", closeStats);
+  document.querySelector(".close-stats-btn").addEventListener("click", closeStats);
 
   document.querySelector(".overlay").addEventListener("click", closeStats);
 
@@ -13086,10 +13084,10 @@ function closeStats() {
   overlay.classList.remove("overlay-visible");
 
   const playersSide = document.querySelector(".players-side");
-  players.classList.remove("visible");
+  playersSide.classList.remove("visible");
 
   const statsSide = document.querySelector(".stats-side");
-  stats.classList.add("visible");
+  statsSide.classList.add("visible");
 
   unFreezeKeyboard();
 }
