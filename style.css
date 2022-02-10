@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Clear sans";
+  src: url(./ClearSans-Light.ttf) format("truetype");
+}
+
 :root {
   --color-tone-1: #d7dadc;
   --color-tone-2: #818384;
@@ -24,7 +29,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Clear Sans';
+  font-family: "Clear Sans";
 }
 
 body {
@@ -184,9 +189,12 @@ body {
 .statistics-btn {
   position: absolute;
   right: 0.25em;
+  height: 1.75em;
+  width: 1.75em;
   border: none;
   background-color: transparent;
   cursor: pointer;
+  font-size: inherit;
 }
 
 .stats-container {
@@ -215,10 +223,13 @@ body {
   position: absolute;
   top: 1em;
   right: 1em;
+  width: 1.5em;
+  height: 1.5em;
   background-color: transparent;
   border: none;
   cursor: pointer;
   color: inherit;
+  font-size: inherit;
 }
 
 .players-side,
@@ -233,7 +244,7 @@ body {
   display: block;
 }
 
-.visible.stats-side {
+.visible.stats-side, .visible.players-side {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -250,15 +261,23 @@ body {
   justify-content: center;
   align-items: center;
   margin: 1em;
-  
 }
 
-.wins, .losses {
+.wins,
+.losses {
   font-size: 2.5em;
-  margin-bottom: -.2em;
-  
+  margin-bottom: -0.2em;
+  font-variant-numeric: proportional-nums;
+  font-weight: lighter;
 }
 
+.stat {
+  font-size: 0.75em;
+}
+
+.hidden {
+  display: none;
+}
 
 .flip-stats {
   transform: rotateX(90deg);
@@ -269,11 +288,17 @@ body {
   position: absolute;
   top: 1em;
   left: 1em;
-  width: 3em;
-  height: 3em;
+  width: 1.75em;
+  height: 1.75em;
   background-color: transparent;
   border: none;
   cursor: pointer;
+  font-size: inherit;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
 }
 
 .overlay {

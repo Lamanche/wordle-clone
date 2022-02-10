@@ -22,8 +22,15 @@ export function showPlayerData() {
   if (playerData?.currentPlayer == 0 || playerData == null) {
     document.querySelector(".current-player-name").textContent = "No players";
 
+    const stats = document.querySelector(".stats-wrapper");
+    stats.classList.add("hidden");
+
     return;
   }
+
+  const stats = document.querySelector(".stats-wrapper");
+  stats.classList.remove("hidden");
+
   document.querySelector(".current-player-name").textContent =
     playerData[playerData.currentPlayer]?.name;
 
@@ -33,7 +40,15 @@ export function showPlayerData() {
   document.querySelector(".losses").textContent =
     playerData[playerData.currentPlayer]?.losses;
 
+  showPlayers();
+
   return;
+}
+
+function showPlayers() {
+  document.querySelector('.player-list')
+  console.log(playerData)
+
 }
 
 function addNewPlayer() {
@@ -50,13 +65,17 @@ function addNewPlayer() {
 
   input.value = "";
 
-  showPlayerData();
   saveData();
+  showPlayerData();
+
+  return;
 }
 
 export function addWin() {
   if (playerData.currentPlayer > 0) {
     playerData[playerData.currentPlayer].addWin();
+
+    saveData();
   }
   return;
 }
@@ -64,10 +83,8 @@ export function addWin() {
 export function addLoss() {
   if (playerData.currentPlayer > 0) {
     playerData[playerData.currentPlayer].addLoss();
+
+    saveData();
   }
   return;
 }
-
-//showPlayerData();
-
-/**************************************************************/

@@ -13069,6 +13069,7 @@ function openStats() {
   document
     .querySelector(".flip-stats-btn")
     .addEventListener("click", flipStats);
+  
   document
     .querySelector(".flip-players-btn")
     .addEventListener("click", flipStats);
