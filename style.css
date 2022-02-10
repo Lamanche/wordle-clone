@@ -24,6 +24,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Clear Sans';
 }
 
 body {
@@ -193,8 +194,7 @@ body {
   height: 14em;
   width: 24em;
   top: 40%;
-  left: 50%;
-  transform: translate(-50%);
+  margin: auto;
   border-radius: 0.5em;
   background-color: var(--color-tone-6);
   color: white;
@@ -219,6 +219,61 @@ body {
   border: none;
   cursor: pointer;
   color: inherit;
+}
+
+.players-side,
+.stats-side {
+  height: 100%;
+  width: 100%;
+  display: none;
+  opacity: 1;
+}
+
+.visible {
+  display: block;
+}
+
+.visible.stats-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.stats-wrapper {
+  display: flex;
+}
+
+.stat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1em;
+  
+}
+
+.wins, .losses {
+  font-size: 2.5em;
+  margin-bottom: -.2em;
+  
+}
+
+
+.flip-stats {
+  transform: rotateX(90deg);
+  opacity: 0.2;
+}
+
+.flip-btn {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  width: 3em;
+  height: 3em;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .overlay {
@@ -253,7 +308,7 @@ body {
   background-color: var(--color-tone-1);
   border-radius: 0.25em;
   font-size: 1.4em;
-  animation: dissapear 1500ms;
+  animation: dissapear 2000ms;
 }
 
 @keyframes dissapear {

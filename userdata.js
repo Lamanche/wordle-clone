@@ -1,0 +1,78 @@
+import { saveData, loadData, playerData } from "./storage.js";
+
+function Player(name) {
+  this.name = name;
+  this.wins = 0;
+  this.losses = 0;
+
+  this.addWin = function () {
+    this.wins++;
+  };
+}
+
+/*Player.prototype.addWin = function () {
+  this.wins++;
+};
+
+Player.prototype.addLoss = function () {
+  this.losses++;
+};*/
+
+document
+  .querySelector(".add-new-player")
+  .addEventListener("click", addNewPlayer);
+
+export function showPlayerData() {
+  if (playerData?.currentPlayer > 0) {
+    document.querySelector(".current-player-name").textContent =
+      playerData[playerData.currentPlayer]?.name;
+
+    document.querySelector(".wins").textContent =
+      playerData[playerData.currentPlayer]?.wins;
+
+    document.querySelector(".losses").textContent =
+      playerData[playerData.currentPlayer]?.losses;
+  }
+
+  document.querySelector(".current-player-name").textContent =
+    'No players'
+
+  return;
+}
+
+function addNewPlayer() {
+  
+  if (playerData.playerCount >= 5) {
+    return console.log("Max 5 players");
+  }
+
+  playerData.playerCount++;
+  playerData.currentPlayer++;
+
+  const input = document.querySelector(".name-input");
+
+  playerData[playerData.currentPlayer] = new Player(input.value);
+
+  input.value = "";
+
+  showPlayerData();
+  saveData();
+}
+
+export function addWin() {
+  if (playerData.currentPlayer > 0) {
+    playerData[playerData.currentPlayer].addWin();
+  }
+  return;
+}
+
+export function addLoss() {
+  if (playerData.currentPlayer > 0) {
+    playerData[playerData.currentPlayer].addLoss();
+  }
+  return;
+}
+
+//showPlayerData();
+
+/**************************************************************/

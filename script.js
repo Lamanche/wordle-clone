@@ -1,3 +1,6 @@
+import { addWin, addLoss, showPlayerData } from "./userdata.js";
+import { saveData, loadData } from "./storage.js";
+
 let selectedLetters = [];
 
 let currentWord;
@@ -12983,7 +12986,9 @@ startGame();
 
 function startGame() {
   randomWord();
-  document.addEventListener("keydown", (e) => pressedKeyOnKeyboard(e));
+  loadData();
+
+  document.addEventListener("keydown", pressedKeyOnKeyboard);
   document.querySelectorAll(".key").forEach((key) =>
     key.addEventListener("click", (e) => {
       const letter = e.target.dataset.key;
@@ -13006,23 +13011,48 @@ function startGame() {
     .querySelector(".close-stats-btn")
     .addEventListener("click", closeStats);
 
-  const stats = document.querySelector(".stats-container");
-  const overlay = document.querySelector(".overlay");
-  overlay.addEventListener("click", () => {
-    stats.classList.remove("stats-open");
-    overlay.classList.remove("overlay-visible");
-  });
+  document.querySelector(".overlay").addEventListener("click", closeStats);
 
   document.querySelector(".retry-btn").addEventListener("click", retry);
 }
 
-/*function stopGame() {
-  document.removeEventListener("keydown" .....);
+function freezeKeyboard() {
+  document.removeEventListener("keydown", pressedKeyOnKeyboard);
 
-  document
-    .querySelectorAll(".key")
-    .forEach((key) => key.removeEventListener("click" ......));
-}*/
+  /*document.querySelectorAll(".key").forEach((key) =>
+    key.removeEventListener("click", (e) => {
+      const letter = e.target.dataset.key;
+      if (letter.toLowerCase() == "delete") {
+        deleteLetters();
+        return;
+      }
+      if (letter.toLowerCase() == "enter") {
+        submitAnswer();
+        return;
+      }
+      pushSelectedLetter(letter);
+    })
+  );*/
+}
+
+function unFreezeKeyboard() {
+  document.addEventListener("keydown", pressedKeyOnKeyboard);
+
+  /*document.querySelectorAll(".key").forEach((key) =>
+    key.removeEventListener("click", (e) => {
+      const letter = e.target.dataset.key;
+      if (letter.toLowerCase() == "delete") {
+        deleteLetters();
+        return;
+      }
+      if (letter.toLowerCase() == "enter") {
+        submitAnswer();
+        return;
+      }
+      pushSelectedLetter(letter);
+    })
+  );*/
+}
 
 function randomWord() {
   const random = Math.floor(Math.random() * 12975);
@@ -13031,6 +13061,16 @@ function randomWord() {
 }
 
 function openStats() {
+  freezeKeyboard();
+  showPlayerData();
+
+  document
+    .querySelector(".flip-stats-btn")
+    .addEventListener("click", flipStats);
+  document
+    .querySelector(".flip-players-btn")
+    .addEventListener("click", flipStats);
+
   const stats = document.querySelector(".stats-container");
   stats.classList.add("stats-open");
 
@@ -13044,6 +13084,31 @@ function closeStats() {
 
   const overlay = document.querySelector(".overlay");
   overlay.classList.remove("overlay-visible");
+
+  const playersSide = document.querySelector(".players-side");
+  players.classList.remove("visible");
+
+  const statsSide = document.querySelector(".stats-side");
+  stats.classList.add("visible");
+
+  unFreezeKeyboard();
+}
+
+function flipStats() {
+  const container = document.querySelector(".stats-container");
+  const players = document.querySelector(".players-side");
+  const stats = document.querySelector(".stats-side");
+
+  container.classList.add("flip-stats");
+
+  container.addEventListener("transitionend", () => {
+    container.classList.remove("flip-stats");
+  });
+
+  setTimeout(() => {
+    players.classList.toggle("visible");
+    stats.classList.toggle("visible");
+  }, 150);
 }
 
 function pressedKeyOnKeyboard(e) {
@@ -13136,38 +13201,42 @@ function checkAnswer(activeTiles) {
       "transitionend",
       () => {
         activeTiles[index].classList.remove("flip");
+        activeTiles[index].dataset.tileActive = "locked";
+        if (word[index].toLowerCase() === letter.toLowerCase()) {
+          activeTiles[index].classList.add("match");
+          const key = document.querySelector(`[data-key='${letter}'i]`);
+          key.classList.add("match");
+          key.setAttribute("data-selected", "true");
+          matchCount++;
+          if (matchCount == 5) {
+            matchCount = 0;
+            selectedLetters = [];
+            setTimeout(() => {
+              showMessage("Yay!");
+            }, 300);
+
+            addWin();
+            saveData();
+            clearTable();
+
+            return;
+          }
+        } else if (currentWord.includes(letter.toLowerCase())) {
+          activeTiles[index].classList.add("includes");
+          const key = document.querySelector(`[data-key='${letter}'i]`);
+          key.classList.add("includes");
+          key.setAttribute("data-selected", "true");
+        } else {
+          activeTiles[index].classList.add("dont-include");
+          const key = document.querySelector(`[data-key='${letter}'i]`);
+          key.classList.add("dont-include");
+          key.setAttribute("data-selected", "true");
+        }
+
+        checkIfLost(matchCount);
       },
       { once: true }
     );
-
-    activeTiles[index].dataset.tileActive = "locked";
-    if (word[index].toLowerCase() === letter.toLowerCase()) {
-      activeTiles[index].classList.add("match");
-      const key = document.querySelector(`[data-key='${letter}'i]`);
-      key.classList.add("match");
-      key.setAttribute("data-selected", "true");
-      matchCount++;
-      if (matchCount == 5) {
-        matchCount = 0;
-        selectedLetters = [];
-        setTimeout(() => {
-          showMessage("Yay!");
-        }, 1500);
-        clearTable();
-        return;
-      }
-    } else if (currentWord.includes(letter.toLowerCase())) {
-      activeTiles[index].classList.add("includes");
-      const key = document.querySelector(`[data-key='${letter}'i]`);
-      key.classList.add("includes");
-      key.setAttribute("data-selected", "true");
-    } else {
-      activeTiles[index].classList.add("dont-include");
-      const key = document.querySelector(`[data-key='${letter}'i]`);
-      key.classList.add("dont-include");
-      key.setAttribute("data-selected", "true");
-    }
-    checkIfLost(matchCount);
   });
 
   selectedLetters = [];
@@ -13185,9 +13254,6 @@ function showMessage(m) {
 }
 
 function clearTable() {
-  //matchCount = 0;
-  //selectedLetters = [];
-
   const activeKeys = document.querySelectorAll('[data-selected="true"]');
   const activeTiles = document.querySelectorAll('[data-tile-active="locked"]');
 
@@ -13202,7 +13268,7 @@ function clearTable() {
       key.className = "key";
       delete key.dataset.selected;
     });
-  }, 2500);
+  }, 1800);
 
   randomWord();
 }
@@ -13212,7 +13278,10 @@ function checkIfLost(matchCount) {
   if (activeTiles.length == 30 && matchCount < 5) {
     setTimeout(() => {
       showMessage("Aww.. lost!");
-    }, 1500);
+    }, 300);
+
+    addLoss();
+    saveData();
     clearTable();
   }
 }
@@ -13221,7 +13290,6 @@ function retry() {
   const activeKeys = document.querySelectorAll('[data-selected="true"]');
   const activeTiles = document.querySelectorAll("[data-tile-active]");
 
-  //matchCount = 0;
   selectedLetters = [];
 
   activeTiles.forEach((tile) => {
