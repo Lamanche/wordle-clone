@@ -1,4 +1,4 @@
-import { showPlayerData } from "./userdata.js";
+import { showPlayerData, Player } from "./userdata.js";
 
 export let playerData = {
   playerCount: 0,
@@ -13,6 +13,18 @@ export function loadData() {
   const data = JSON.parse(localStorage.getItem("playerData"));
 
   if (data == null) return;
+
+  Object.entries(data).forEach((key) => {
+    if (key[0].match(/^[1-5]$/)) {
+      key[1].addWin = function () {
+        this.wins++;
+      };
+
+      key[1].addLoss = function () {
+        this.losses++;
+      };
+    }
+  });
 
   playerData = data;
 }

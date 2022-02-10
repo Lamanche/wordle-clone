@@ -1,22 +1,18 @@
 import { saveData, loadData, playerData } from "./storage.js";
 
-function Player(name) {
+export function Player(name) {
   this.name = name;
   this.wins = 0;
   this.losses = 0;
-
-  this.addWin = function () {
-    this.wins++;
-  };
 }
 
-/*Player.prototype.addWin = function () {
+Player.prototype.addWin = function () {
   this.wins++;
 };
 
 Player.prototype.addLoss = function () {
   this.losses++;
-};*/
+};
 
 document
   .querySelector(".add-new-player")
