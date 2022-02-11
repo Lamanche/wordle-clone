@@ -1,4 +1,4 @@
-import { addWin, addLoss, showPlayerData } from "./userdata.js";
+import { addWin, addLoss, showPlayerData, checkAddBtn } from "./userdata.js";
 import { saveData, loadData } from "./storage.js";
 
 let selectedLetters = [];
@@ -13105,6 +13105,11 @@ export function flipStats() {
   const input = document.querySelector(".name-input");
   input.classList.remove("input-open");
   input.value = "";
+
+  const btn = document.querySelector(".add-new-player-btn");
+  if (btn.dataset.open == "true") {
+    checkAddBtn();
+  }
 
   container.classList.add("flip-stats");
 

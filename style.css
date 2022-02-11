@@ -252,6 +252,7 @@ body {
   justify-content: baseline;
   align-items: center;
   padding-top: 1.8em;
+  padding-right: 1em;
 }
 
 .stats-wrapper {
@@ -286,10 +287,18 @@ body {
   width: 11em;
 }
 
+.list-item-container {
+  display: flex;
+  position: relative;
+}
+
 .list-item {
   display: flex;
   line-height: 1.7em;
+  width: 100%;
   cursor: pointer;
+  position: relative;
+  z-index: 100;
 }
 
 .list-item:hover {
@@ -367,10 +376,12 @@ svg {
   left: 1em;
   bottom: 1em;
   display: flex;
+  width: calc(100% - 2em);
 }
 
 .add-new-player-btn {
-  height: 1.5em;
+  height: 1.75em;
+  width: 1.75em;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -380,21 +391,86 @@ svg {
 }
 
 .name-input {
-  height: 1, 75em;
+  display: flex;
+  height: 1.75em;
   width: 0;
-  /*transform: translateX(-100%);*/
   transition: width 0.25s ease-in-out;
-  border: none;
-  border-radius: 0.5em;
-  background-color: var(--color-tone-3);
-  color: inherit;
 }
 
-
-
 .input-open {
-  /* transform: translateX(0);*/
-  width: 14em;
+  width: 100%;
+}
+
+.input {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border: none;
+  border-radius: 0.5em;
+  background-color: var(--color-tone-4);
+  color: inherit;
+  font-size: 1.2em;
+  font-weight: bolder;
+  text-align: center;
+  transition: all 100ms ease-in-out;
+}
+
+.input-open > input {
+  box-shadow: 0px 0px 20px 12px var(--color-tone-4);
+}
+
+.input::placeholder {
+  color: var(--color-tone-1);
+  font-size: 0.8em;
+  font-weight: bolder;
+  position: relative;
+  bottom: 0.2em;
+}
+
+.input:focus {
+  background-color: var(--color-tone-3);
+  box-shadow: 0px 0px 20px 12px var(--color-tone-3);
+  outline: none;
+}
+
+.error::placeholder {
+  color: red;
+}
+
+.add-player-btn {
+  height: 1.75em;
+  width: 2.2em;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font-size: inherit;
+  margin-left: 1em;
+  transition: width 0.25s ease-in-out;
+}
+
+.max-players-error {
+  color: red;
+  position: relative;
+  top: 0.7em;
+  left: 22%;
+  z-index: 2;
+}
+
+.delete-user {
+  position: absolute;
+  right: -3em;
+  height: 100%;
+  width: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 0.8em;
+  z-index: 10;
 }
 
 .overlay {
