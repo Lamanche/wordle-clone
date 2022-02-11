@@ -1,4 +1,4 @@
-import { showPlayerData, Player } from "./userdata.js";
+import { showPlayerData, Player, newPlayerData } from "./userdata.js";
 
 export let playerData = {
   playerCount: 0,
@@ -27,4 +27,8 @@ export function loadData() {
   });
 
   playerData = data;
+}
+
+export function updateDataObject() {
+  return (playerData = newPlayerData);
 }

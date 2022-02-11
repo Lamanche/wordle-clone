@@ -1,4 +1,4 @@
-import { saveData, loadData, playerData } from "./storage.js";
+import { saveData, loadData, playerData, updateDataObject } from "./storage.js";
 import { flipStats } from "./script.js";
 
 export function Player(name) {
@@ -14,6 +14,8 @@ Player.prototype.addWin = function () {
 Player.prototype.addLoss = function () {
   this.losses++;
 };
+
+export let newPlayerData = {};
 
 document
   .querySelector(".add-new-player-btn")
@@ -115,19 +117,48 @@ function deletePlayer(e) {
 
   listItems.forEach((item) => {
     if (item.dataset.index == e.target.dataset.index) {
-      console.log(item.dataset.index);
       item.remove();
 
-      /**************Objektist kustutamise loogika******************************/
-      /*       võta kõik võtmed objektist. kustuta indexi võti ja pane ülejäänud tagasi uuesti numbriliselt õigesti jooksma */
-      delete playerData[item.dataset.index + 1];
       playerData.playerCount--;
-      playerData.currentPlayer--;
+
+      if (playerData.currentPlayer > 1) {
+        playerData.currentPlayer--;
+      }
+
+      let i = item.dataset.index;
+      i++;
+      delete playerData[i];
+
+      correctData();
 
       saveData();
-      console.log(playerData);
+      showPlayers();
+      showPlayerData();
     }
   });
+}
+
+function correctData() {
+  let counter = 1;
+  let players = 0;
+
+  Object.keys(playerData).forEach((key) => {
+    if (key.match(/^[1-5]$/)) {
+      newPlayerData[counter] = playerData[key];
+
+      players++;
+      counter++;
+    } else {
+      newPlayerData[key] = playerData[key];
+    }
+  });
+  updateDataObject();
+  newPlayerData = {};
+
+  if (players == 0) {
+    playerData.playerCount = 0;
+    playerData.currentPlayer = 0;
+  }
 }
 
 function openInput() {

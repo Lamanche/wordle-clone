@@ -197,6 +197,17 @@ body {
   font-size: inherit;
 }
 
+.retry-btn {
+  position: absolute;
+  left: 0.25em;
+  height: 1.75em;
+  width: 1.75em;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+}
+
 .stats-container {
   position: absolute;
   height: 14em;

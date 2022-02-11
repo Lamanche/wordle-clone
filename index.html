@@ -1,156 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script type='module' src="script.js" defer></script>
-    <script type='module' src="storage.js" defer></script>
-    <script type='module' src="userdata.js" defer ></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="script.js" defer></script>
+    <script type="module" src="storage.js" defer></script>
+    <script type="module" src="userdata.js" defer></script>
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="overlay"></div>
     <header class="header">
-        <button class="retry-btn">0</button>
-        <h1 class="header-text">Wordle</h1>
-        <button class="statistics-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path fill="var(--color-tone-3)" d="M16,11V3H8v6H2v12h20V11H16z M10,5h4v14h-4V5z M4,11h4v8H4V11z M20,19h-4v-6h4V19z"></path>
-            </svg>
-        </button>     
+      <button class="retry-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 16 16">
+            <path fill="var(--color-tone-3)" fill-rule="evenodd" d="M5.23331,0.493645 C6.8801,-0.113331 8.6808,-0.161915 10.3579,0.355379 C11.4019,0.6773972 12.361984,1.20757325 13.1838415,1.90671757 L13.4526,2.14597 L14.2929,1.30564 C14.8955087,0.703065739 15.9071843,1.0850774 15.994017,1.89911843 L16,2.01275 L16,6.00002 L12.0127,6.00002 C11.1605348,6.00002 10.7153321,5.01450817 11.2294893,4.37749065 L11.3056,4.29291 L12.0372,3.56137 C11.389,2.97184 10.6156,2.52782 9.76845,2.26653 C8.5106,1.87856 7.16008,1.915 5.92498,2.37023 C4.68989,2.82547 3.63877,3.67423 2.93361,4.78573 C2.22844,5.89723 1.90836,7.20978 2.02268,8.52112 C2.13701,9.83246 2.6794,11.0698 3.56627,12.0425 C4.45315,13.0152 5.63528,13.6693 6.93052,13.9039 C8.22576,14.1385 9.56221,13.9407 10.7339,13.3409 C11.9057,12.7412 12.8476,11.7727 13.4147,10.5848 C13.6526,10.0864 14.2495,9.8752 14.748,10.1131 C15.2464,10.351 15.4575,10.948 15.2196,11.4464 C14.4635,13.0302 13.2076,14.3215 11.6453,15.1213 C10.0829,15.921 8.30101,16.1847 6.57402,15.8719 C4.84704,15.559 3.27086,14.687 2.08836,13.39 C0.905861,12.0931 0.182675,10.4433 0.0302394,8.69483 C-0.122195,6.94637 0.304581,5.1963 1.2448,3.7143 C2.18503,2.2323 3.58652,1.10062 5.23331,0.493645 Z M6,5.46077 C6,5.09472714 6.37499031,4.86235811 6.69509872,5.0000726 L6.7678,5.03853 L10.7714,7.57776 C11.0528545,7.75626909 11.0784413,8.14585256 10.8481603,8.36273881 L10.7714,8.42224 L6.7678,10.9615 C6.45867857,11.1575214 6.06160816,10.965274 6.00646097,10.6211914 L6,10.5392 L6,5.46077 Z"/>
+          </svg>
+      </button>
+      <h1 class="header-text">Wordle</h1>
+      <button class="statistics-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            fill="var(--color-tone-3)"
+            d="M16,11V3H8v6H2v12h20V11H16z M10,5h4v14h-4V5z M4,11h4v8H4V11z M20,19h-4v-6h4V19z"
+          ></path>
+        </svg>
+      </button>
     </header>
 
     <div class="message-container"></div>
 
     <div class="stats-container">
-        <button class="close-stats-btn">
-            <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" id="svg2" viewBox="0 0 24 24" sodipodi:docname="close_icon_grey.svg" inkscape:export-filename="D:\Загрузки\close_icon_black2.svg.png" inkscape:export-xdpi="72.959999" inkscape:export-ydpi="72.959999" inkscape:version="0.92.3 (2405546, 2018-03-11)">
-                
-                
-                <g transform="translate(3.9661017,3.5677966)" id="imagebot_2" label="Layer 1">
-                  <path inkscape:connector-curvature="0" stroke-miterlimit="4" d="M -2.5783352e-4,-0.00146808 17.435473,18.212367" id="imagebot_5" style="opacity:1;fill:#5f6368;stroke:#5f6368;stroke-width:3.23161912;stroke-linecap:round;stroke-miterlimit:4;fill-opacity:1;stroke-opacity:1"/>
-                  <path inkscape:connector-curvature="0" stroke-miterlimit="4" d="M -2.5783352e-4,18.212367 17.435473,-0.00146808" id="imagebot_4" style="opacity:1;fill:#5f6368;stroke:#5f6368;stroke-width:3.23161912;stroke-linecap:round;stroke-miterlimit:4;fill-opacity:1;stroke-opacity:1"/>
-                </g>
-              </svg>
+      <button class="close-stats-btn">
+        <svg
+          xmlns:dc="http://purl.org/dc/elements/1.1/"
+          xmlns:cc="http://creativecommons.org/ns#"
+          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+          xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+          version="1.1"
+          id="svg2"
+          viewBox="0 0 24 24"
+          sodipodi:docname="close_icon_grey.svg"
+          inkscape:export-filename="D:\Загрузки\close_icon_black2.svg.png"
+          inkscape:export-xdpi="72.959999"
+          inkscape:export-ydpi="72.959999"
+          inkscape:version="0.92.3 (2405546, 2018-03-11)"
+        >
+          <g
+            transform="translate(3.9661017,3.5677966)"
+            id="imagebot_2"
+            label="Layer 1"
+          >
+            <path
+              inkscape:connector-curvature="0"
+              stroke-miterlimit="4"
+              d="M -2.5783352e-4,-0.00146808 17.435473,18.212367"
+              id="imagebot_5"
+              style="
+                opacity: 1;
+                fill: #5f6368;
+                stroke: #5f6368;
+                stroke-width: 3.23161912;
+                stroke-linecap: round;
+                stroke-miterlimit: 4;
+                fill-opacity: 1;
+                stroke-opacity: 1;
+              "
+            />
+            <path
+              inkscape:connector-curvature="0"
+              stroke-miterlimit="4"
+              d="M -2.5783352e-4,18.212367 17.435473,-0.00146808"
+              id="imagebot_4"
+              style="
+                opacity: 1;
+                fill: #5f6368;
+                stroke: #5f6368;
+                stroke-width: 3.23161912;
+                stroke-linecap: round;
+                stroke-miterlimit: 4;
+                fill-opacity: 1;
+                stroke-opacity: 1;
+              "
+            />
+          </g>
+        </svg>
+      </button>
+
+      <div class="players-side">
+        <button class="flip-btn flip-players-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path
+              fill="var(--color-tone-3)"
+              d="M16,11V3H8v6H2v12h20V11H16z M10,5h4v14h-4V5z M4,11h4v8H4V11z M20,19h-4v-6h4V19z"
+            ></path>
+          </svg>
         </button>
-        
-        <div class="players-side">            
-            <button class="flip-btn flip-players-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path fill="var(--color-tone-3)" d="M16,11V3H8v6H2v12h20V11H16z M10,5h4v14h-4V5z M4,11h4v8H4V11z M20,19h-4v-6h4V19z"></path>
-                </svg>
+
+        <ol class="player-list">
+          <li class="list-item first-list-item">
+            <h1 class="first-h1">Name</h1>
+            <p class="first-p">Wins</p>
+            <p class="first-p first-p-2">Losses</p>
+          </li>
+        </ol>
+
+        <div class="new-player">
+          <button class="add-new-player-btn" data-open="false">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              version="1.1"
+              id="Capa_1"
+              x="0px"
+              y="0px"
+              viewBox="0 0 490 490"
+              style="enable-background: new 0 0 490 490"
+              xml:space="preserve"
+            >
+              <polygon
+                fill="var(--color-tone-3)"
+                points="222.031,490 267.969,490 267.969,267.969 490,267.969 490,222.031 267.969,222.031 267.969,0 222.031,0   222.031,222.031 0,222.031 0,267.969 222.031,267.969 "
+              />
+            </svg>
+          </button>
+          <div class="name-input">
+            <input type="text" class="input" placeholder="Name..." />
+            <button class="add-player-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                version="1.1"
+                id="Capa_1"
+                x="0px"
+                y="0px"
+                viewBox="0 0 490 490"
+                style="enable-background: new 0 0 490 490"
+                xml:space="preserve"
+              >
+                <polygon
+                  fill="var(--color-tone-3)"
+                  points="452.253,28.326 197.831,394.674 29.044,256.875 0,292.469 207.253,461.674 490,54.528 "
+                />
+              </svg>
             </button>
+          </div>
+        </div>
+      </div>
 
-            <ol class="player-list">
-                <li class="list-item first-list-item"><h1 class="first-h1">Name</h1><p class="first-p">Wins</p><p class="first-p first-p-2">Losses</p></li>
-            </ol>
+      <div class="stats-side visible">
+        <h1 class="current-player-name"></h1>
+        <div class="stats-wrapper">
+          <div class="stat-container">
+            <h2 class="wins"></h2>
+            <p class="stat">Wins</p>
+          </div>
+          <div class="stat-container">
+            <h2 class="losses"></h2>
+            <p class="stat">Losses</p>
+          </div>
+        </div>
 
-            <div class="new-player">
-                 <button class="add-new-player-btn" data-open='false'>
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;" xml:space="preserve">
-                        <polygon fill="var(--color-tone-3)" points="222.031,490 267.969,490 267.969,267.969 490,267.969 490,222.031 267.969,222.031 267.969,0 222.031,0   222.031,222.031 0,222.031 0,267.969 222.031,267.969 "/>
-                     </svg>
-                 </button>
-                 <div class="name-input">
-                     <input type="text" class="input" placeholder='Name...'>
-                     <button class="add-player-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;" xml:space="preserve">
-                            <polygon fill="var(--color-tone-3)" points="452.253,28.326 197.831,394.674 29.044,256.875 0,292.469 207.253,461.674 490,54.528 "/>
-                        </svg>
-                     </button>
-                 </div>
-                
-            </div>
-           
-        </div>     
-
-        <div class="stats-side visible">            
-            <h1 class="current-player-name"></h1>
-            <div class="stats-wrapper">
-                <div class="stat-container">
-                <h2 class="wins"></h2>
-                <p class="stat">Wins</p>
-            </div>
-            <div class="stat-container">
-                <h2 class="losses"></h2>
-                <p class="stat">Losses</p>
-            </div>
-
-            </div>
-            
-            <button class="flip-btn flip-stats-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="3em" height="3em" viewBox="0 0 347.708 347.708" style="enable-background:new 0 0 347.708 347.708;" xml:space="preserve">                    
-                    <path fill="var(--color-tone-3)" d="M90.258,170.26l1.261-1.18l1.267,1.18c11.082,10.434,23.368,16.187,34.54,16.187c11.736,0,23.857-5.104,35.053-14.748    l0.937-0.793l2.459,1.198c2.084,1.9,5.822,4.627,7.509,5.449l2.306,1.123l-0.252,0.252l0.882,0.528    c2.117,1.249,4.375,2.463,6.951,3.754c2.594,1.146,4.828,2.018,7.206,2.798c0.456,0.162,11.511,3.729,24.121,9.577l2.252,0.685    c11.974,4.563,17.041,10.995,17.222,11.218c18.591,27.586,21.719,87.838,22.02,94.575c-0.138,9.415-2.811,11.865-3.524,12.327    c-41.662,18.651-104.61,23.497-116.791,24.266l-0.333,0.019l-0.354-0.091c-0.408-0.132-0.832-0.191-1.348-0.191h-0.006    l-0.429,0.018c-3.327,0.234-6.089,0.343-8.659,0.343h-2.018c-7.587-0.457-75.459-4.9-118.895-24.224    c-0.88-0.372-3.456-3.339-3.633-11.979c0.006-0.643,2.243-65.687,21.75-94.666c0.952-1.2,6.266-7.374,16.864-11.433    c9.323-2.858,32.375-10.509,44.985-19.636c0.531-0.324,1.06-0.864,1.618-1.429C86.133,174.38,88.051,172.319,90.258,170.26z     M220.082,186.53l-1.723-0.498c-2.822-1.31-5.801-2.606-8.875-3.861c4.335-2.03,7.89-4.023,10.532-5.945    c0.433-0.246,0.853-0.678,1.249-1.093c0.961-1.023,2.233-2.402,3.734-3.804l0.805-0.739l0.781,0.756    c8.299,7.791,17.449,12.066,25.796,12.066c8.779,0,17.835-3.801,26.169-10.994l0.601-0.493l1.676,0.811    c1.537,1.42,4.329,3.44,5.578,4.064l1.441,0.697l-0.168,0.18l0.912,0.529c1.586,0.942,3.279,1.849,5.177,2.785    c1.945,0.865,3.614,1.525,5.368,2.102c0.342,0.115,8.503,2.738,17.918,7.098l1.663,0.518c8.581,3.271,12.311,7.781,12.677,8.25    c13.871,20.572,16.104,65.141,16.314,70.1c-0.102,6.888-2.012,8.659-2.491,8.966c-26.098,11.679-63.555,16.062-79.317,17.456    c-1.424-20.453-6.468-68.635-23.329-93.699l-0.715-0.858C238.439,196.69,230.957,190.697,220.082,186.53z M210.318,112.073    l0.295-0.351c1.32-0.964,1.969-2.459,1.717-4.002c-3.135-18.828-1.104-26.724-0.396-28.703    c5.465-16.768,22.662-24.583,26.025-25.967c0.685-0.259,1.993-0.652,3.387-0.886l0.42-0.105l2.594-0.135l0.024,0.18l0.78-0.069    c0.589-0.048,1.153-0.135,1.544-0.222l0.87-0.195c0.553,0.018,7.344,0.892,17.186,3.903l6.93,2.387    c12.599,3.72,18.435,10.668,19.516,12.076c10.118,11.493,7.41,28.772,4.876,38.062c-0.276,1.15-0.108,2.318,0.553,3.272    l0.559,0.721c0.714,0.952,1.356,4.744-0.835,12.928c-0.408,2.48-1.333,4.471-2.654,5.795c-0.54,0.558-0.895,1.285-1.021,2.125    c-3.423,20.059-21.39,42.487-40.305,42.487c-16.08,0-34.407-20.639-37.698-42.487c-0.132-0.834-0.486-1.561-1.08-2.225    c-1.333-1.39-2.204-3.419-2.738-6.482C209.267,118.505,209.099,113.917,210.318,112.073z M70.479,90.453l0.435-0.504    c1.693-1.222,2.51-3.15,2.204-5.122c-4.246-25.512-1.478-36.125-0.517-38.788c7.377-22.665,30.64-33.252,35.212-35.134    c0.955-0.37,2.732-0.904,4.606-1.204l0.504-0.117l3.837-0.216l0.012,0.246l0.826-0.087c0.769-0.072,1.513-0.183,2.393-0.363    l0.871-0.207c0.714,0.006,9.691,1.138,23.238,5.281l9.323,3.204c17.023,5.035,24.956,14.462,26.409,16.336    c13.691,15.546,10.04,38.935,6.642,51.497c-0.391,1.447-0.156,2.96,0.66,4.188l0.757,0.973c1.249,1.672,1.718,7.269-1.068,17.627    c-0.564,3.384-1.82,6.125-3.663,7.944c-0.667,0.721-1.108,1.66-1.297,2.714c-4.633,27.121-28.943,57.457-54.542,57.457    c-21.761,0-46.573-27.913-51.05-57.438c-0.147-1.051-0.583-2.018-1.357-2.847c-1.858-1.928-3.05-4.705-3.777-8.83    C68.983,99.295,68.77,93.047,70.479,90.453z"/>
-                </svg>
-            </button>
-        </div>        
+        <button class="flip-btn flip-stats-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            id="Capa_1"
+            x="0px"
+            y="0px"
+            width="3em"
+            height="3em"
+            viewBox="0 0 347.708 347.708"
+            style="enable-background: new 0 0 347.708 347.708"
+            xml:space="preserve"
+          >
+            <path
+              fill="var(--color-tone-3)"
+              d="M90.258,170.26l1.261-1.18l1.267,1.18c11.082,10.434,23.368,16.187,34.54,16.187c11.736,0,23.857-5.104,35.053-14.748    l0.937-0.793l2.459,1.198c2.084,1.9,5.822,4.627,7.509,5.449l2.306,1.123l-0.252,0.252l0.882,0.528    c2.117,1.249,4.375,2.463,6.951,3.754c2.594,1.146,4.828,2.018,7.206,2.798c0.456,0.162,11.511,3.729,24.121,9.577l2.252,0.685    c11.974,4.563,17.041,10.995,17.222,11.218c18.591,27.586,21.719,87.838,22.02,94.575c-0.138,9.415-2.811,11.865-3.524,12.327    c-41.662,18.651-104.61,23.497-116.791,24.266l-0.333,0.019l-0.354-0.091c-0.408-0.132-0.832-0.191-1.348-0.191h-0.006    l-0.429,0.018c-3.327,0.234-6.089,0.343-8.659,0.343h-2.018c-7.587-0.457-75.459-4.9-118.895-24.224    c-0.88-0.372-3.456-3.339-3.633-11.979c0.006-0.643,2.243-65.687,21.75-94.666c0.952-1.2,6.266-7.374,16.864-11.433    c9.323-2.858,32.375-10.509,44.985-19.636c0.531-0.324,1.06-0.864,1.618-1.429C86.133,174.38,88.051,172.319,90.258,170.26z     M220.082,186.53l-1.723-0.498c-2.822-1.31-5.801-2.606-8.875-3.861c4.335-2.03,7.89-4.023,10.532-5.945    c0.433-0.246,0.853-0.678,1.249-1.093c0.961-1.023,2.233-2.402,3.734-3.804l0.805-0.739l0.781,0.756    c8.299,7.791,17.449,12.066,25.796,12.066c8.779,0,17.835-3.801,26.169-10.994l0.601-0.493l1.676,0.811    c1.537,1.42,4.329,3.44,5.578,4.064l1.441,0.697l-0.168,0.18l0.912,0.529c1.586,0.942,3.279,1.849,5.177,2.785    c1.945,0.865,3.614,1.525,5.368,2.102c0.342,0.115,8.503,2.738,17.918,7.098l1.663,0.518c8.581,3.271,12.311,7.781,12.677,8.25    c13.871,20.572,16.104,65.141,16.314,70.1c-0.102,6.888-2.012,8.659-2.491,8.966c-26.098,11.679-63.555,16.062-79.317,17.456    c-1.424-20.453-6.468-68.635-23.329-93.699l-0.715-0.858C238.439,196.69,230.957,190.697,220.082,186.53z M210.318,112.073    l0.295-0.351c1.32-0.964,1.969-2.459,1.717-4.002c-3.135-18.828-1.104-26.724-0.396-28.703    c5.465-16.768,22.662-24.583,26.025-25.967c0.685-0.259,1.993-0.652,3.387-0.886l0.42-0.105l2.594-0.135l0.024,0.18l0.78-0.069    c0.589-0.048,1.153-0.135,1.544-0.222l0.87-0.195c0.553,0.018,7.344,0.892,17.186,3.903l6.93,2.387    c12.599,3.72,18.435,10.668,19.516,12.076c10.118,11.493,7.41,28.772,4.876,38.062c-0.276,1.15-0.108,2.318,0.553,3.272    l0.559,0.721c0.714,0.952,1.356,4.744-0.835,12.928c-0.408,2.48-1.333,4.471-2.654,5.795c-0.54,0.558-0.895,1.285-1.021,2.125    c-3.423,20.059-21.39,42.487-40.305,42.487c-16.08,0-34.407-20.639-37.698-42.487c-0.132-0.834-0.486-1.561-1.08-2.225    c-1.333-1.39-2.204-3.419-2.738-6.482C209.267,118.505,209.099,113.917,210.318,112.073z M70.479,90.453l0.435-0.504    c1.693-1.222,2.51-3.15,2.204-5.122c-4.246-25.512-1.478-36.125-0.517-38.788c7.377-22.665,30.64-33.252,35.212-35.134    c0.955-0.37,2.732-0.904,4.606-1.204l0.504-0.117l3.837-0.216l0.012,0.246l0.826-0.087c0.769-0.072,1.513-0.183,2.393-0.363    l0.871-0.207c0.714,0.006,9.691,1.138,23.238,5.281l9.323,3.204c17.023,5.035,24.956,14.462,26.409,16.336    c13.691,15.546,10.04,38.935,6.642,51.497c-0.391,1.447-0.156,2.96,0.66,4.188l0.757,0.973c1.249,1.672,1.718,7.269-1.068,17.627    c-0.564,3.384-1.82,6.125-3.663,7.944c-0.667,0.721-1.108,1.66-1.297,2.714c-4.633,27.121-28.943,57.457-54.542,57.457    c-21.761,0-46.573-27.913-51.05-57.438c-0.147-1.051-0.583-2.018-1.357-2.847c-1.858-1.928-3.05-4.705-3.777-8.83    C68.983,99.295,68.77,93.047,70.479,90.453z"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
 
     <div class="tiles-container">
-        <div data-tile-active="false" class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
-        <div data-tile-active='false' class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
+      <div data-tile-active="false" class="tile"></div>
     </div>
 
     <div class="keyboard">
-        <button class="key" data-key="Q">Q</button>
-        <button class="key" data-key="W">W</button>
-        <button class="key" data-key="E">E</button>
-        <button class="key" data-key="R">R</button>
-        <button class="key" data-key="T">T</button>
-        <button class="key" data-key="Y">Y</button>
-        <button class="key" data-key="U">U</button>
-        <button class="key" data-key="I">I</button>
-        <button class="key" data-key="O">O</button>
-        <button class="key" data-key="P">P</button>
-        <div class="space"></div>
-        <button class="key" data-key="A">A</button>
-        <button class="key" data-key="S">S</button>
-        <button class="key" data-key="D">D</button>
-        <button class="key" data-key="F">F</button>
-        <button class="key" data-key="G">G</button>
-        <button class="key" data-key="H">H</button>
-        <button class="key" data-key="J">J</button>
-        <button class="key" data-key="K">K</button>
-        <button class="key" data-key="L">L</button>
-        <button class="key large" data-key="ENTER">Enter</button>
-        <button class="key" data-key="Z">Z</button>
-        <button class="key" data-key="X">X</button>
-        <button class="key" data-key="C">C</button>
-        <button class="key" data-key="V">V</button>
-        <button class="key" data-key="B">B</button>
-        <button class="key" data-key="N">N</button>
-        <button class="key" data-key="M">M</button>
-        <button class="key large" data-key="DELETE">Delete</button>
+      <button class="key" data-key="Q">Q</button>
+      <button class="key" data-key="W">W</button>
+      <button class="key" data-key="E">E</button>
+      <button class="key" data-key="R">R</button>
+      <button class="key" data-key="T">T</button>
+      <button class="key" data-key="Y">Y</button>
+      <button class="key" data-key="U">U</button>
+      <button class="key" data-key="I">I</button>
+      <button class="key" data-key="O">O</button>
+      <button class="key" data-key="P">P</button>
+      <div class="space"></div>
+      <button class="key" data-key="A">A</button>
+      <button class="key" data-key="S">S</button>
+      <button class="key" data-key="D">D</button>
+      <button class="key" data-key="F">F</button>
+      <button class="key" data-key="G">G</button>
+      <button class="key" data-key="H">H</button>
+      <button class="key" data-key="J">J</button>
+      <button class="key" data-key="K">K</button>
+      <button class="key" data-key="L">L</button>
+      <button class="key large" data-key="ENTER">Enter</button>
+      <button class="key" data-key="Z">Z</button>
+      <button class="key" data-key="X">X</button>
+      <button class="key" data-key="C">C</button>
+      <button class="key" data-key="V">V</button>
+      <button class="key" data-key="B">B</button>
+      <button class="key" data-key="N">N</button>
+      <button class="key" data-key="M">M</button>
+      <button class="key large" data-key="DELETE">Delete</button>
     </div>
-</body>
+  </body>
 </html>
