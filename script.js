@@ -13047,6 +13047,9 @@ function openStats() {
 
   const overlay = document.querySelector(".overlay");
   overlay.classList.add("overlay-visible");
+
+  const statsSide = document.querySelector(".stats-side");
+  statsSide.classList.add("visible");
 }
 
 function closeStats() {
@@ -13059,8 +13062,8 @@ function closeStats() {
   const playersSide = document.querySelector(".players-side");
   playersSide.classList.remove("visible");
 
-  const statsSide = document.querySelector(".stats-side");
-  statsSide.classList.add("visible");
+  //const statsSide = document.querySelector(".stats-side");
+  //statsSide.classList.add("visible");
 
   unFreezeKeyboard();
 }
