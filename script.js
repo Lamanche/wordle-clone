@@ -12988,22 +12988,7 @@ function startGame() {
   randomWord();
   loadData();
 
-  document.addEventListener("keydown", pressedKeyOnKeyboard);
-
-  document.querySelectorAll(".key").forEach((key) =>
-    key.addEventListener("click", (e) => {
-      const letter = e.target.dataset.key;
-      if (letter.toLowerCase() == "delete") {
-        deleteLetters();
-        return;
-      }
-      if (letter.toLowerCase() == "enter") {
-        submitAnswer();
-        return;
-      }
-      pushSelectedLetter(letter);
-    })
-  );
+  unFreezeKeyboard();
 
   document
     .querySelector(".statistics-btn")
@@ -13021,39 +13006,22 @@ function startGame() {
 function freezeKeyboard() {
   document.removeEventListener("keydown", pressedKeyOnKeyboard);
 
-  /*document.querySelectorAll(".key").forEach((key) =>
-    key.removeEventListener("click", (e) => {
-      const letter = e.target.dataset.key;
-      if (letter.toLowerCase() == "delete") {
-        deleteLetters();
-        return;
-      }
-      if (letter.toLowerCase() == "enter") {
-        submitAnswer();
-        return;
-      }
-      pushSelectedLetter(letter);
-    })
-  );*/
+  document
+    .querySelectorAll(".key")
+    .forEach((key) => key.removeEventListener("click", listenForKeyClick));
 }
 
-function unFreezeKeyboard() {
-  document.addEventListener("keydown", pressedKeyOnKeyboard);
+function unFreezeKeyboard(time) {
+  let timeX = 0;
+  if (time) timeX = time;
 
-  /*document.querySelectorAll(".key").forEach((key) =>
-    key.removeEventListener("click", (e) => {
-      const letter = e.target.dataset.key;
-      if (letter.toLowerCase() == "delete") {
-        deleteLetters();
-        return;
-      }
-      if (letter.toLowerCase() == "enter") {
-        submitAnswer();
-        return;
-      }
-      pushSelectedLetter(letter);
-    })
-  );*/
+  setTimeout(() => {
+    document.addEventListener("keydown", pressedKeyOnKeyboard);
+
+    document
+      .querySelectorAll(".key")
+      .forEach((key) => key.addEventListener("click", listenForKeyClick));
+  }, timeX);
 }
 
 function randomWord() {
@@ -13144,6 +13112,19 @@ function pressedKeyOnKeyboard(e) {
   return;
 }
 
+function listenForKeyClick(e) {
+  const letter = e.target.dataset.key;
+  if (letter.toLowerCase() == "delete") {
+    deleteLetters();
+    return;
+  }
+  if (letter.toLowerCase() == "enter") {
+    submitAnswer();
+    return;
+  }
+  pushSelectedLetter(letter);
+}
+
 function pushSelectedLetter(letter) {
   if (selectedLetters.length >= 5) return;
   selectedLetters.push(letter);
@@ -13179,6 +13160,8 @@ function deleteLetters() {
 }
 
 function submitAnswer() {
+  freezeKeyboard();
+
   const activeTiles = document.querySelectorAll('[data-tile-active="true"]');
   if (selectedLetters.length < 5) {
     showMessage("Not enough letters");
@@ -13194,6 +13177,11 @@ function submitAnswer() {
       activeTiles.forEach((tile) => tile.classList.remove("error"));
       emptyTiles.forEach((tile) => tile.classList.remove("error"));
     }, 300);
+
+    setTimeout(() => {
+      unFreezeKeyboard();
+    }, 600);
+
     return;
   } else if ((selectedLetters.length = 5)) {
     checkAnswer(activeTiles);
@@ -13233,6 +13221,7 @@ function checkAnswer(activeTiles) {
 
             return;
           }
+          return;
         } else if (currentWord.includes(letter.toLowerCase())) {
           activeTiles[index].classList.add("includes");
           const key = document.querySelector(`[data-key='${letter}'i]`);
@@ -13244,6 +13233,7 @@ function checkAnswer(activeTiles) {
           key.classList.add("dont-include");
           key.setAttribute("data-selected", "true");
         }
+        unFreezeKeyboard(1400);
 
         checkIfLost(matchCount);
       },
@@ -13280,9 +13270,10 @@ function clearTable() {
       key.className = "key";
       delete key.dataset.selected;
     });
+    startGame();
   }, 1800);
 
-  randomWord();
+  //startGame();
 }
 
 function checkIfLost(matchCount) {
@@ -13315,5 +13306,5 @@ function retry() {
     delete key.dataset.selected;
   });
 
-  randomWord();
+  startGame();
 }
