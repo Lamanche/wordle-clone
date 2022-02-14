@@ -511,6 +511,7 @@ svg {
   border-radius: 0.25em;
   font-size: 1.4em;
   animation: dissapear 2000ms;
+  white-space: nowrap;
 }
 
 @keyframes dissapear {

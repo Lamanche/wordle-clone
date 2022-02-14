@@ -13065,9 +13065,6 @@ function closeStats() {
   const playersSide = document.querySelector(".players-side");
   playersSide.classList.remove("visible");
 
-  //const statsSide = document.querySelector(".stats-side");
-  //statsSide.classList.add("visible");
-
   unFreezeKeyboard();
 }
 
@@ -13198,7 +13195,9 @@ function submitAnswer() {
 function checkAnswer(activeTiles) {
   let word = [...currentWord];
   let matchCount = 0;
+  let win = false;
 
+  //console.log(win)
   //console.log(word)
   //console.log(selectedLetters)
 
@@ -13230,7 +13229,7 @@ function checkAnswer(activeTiles) {
             setTimeout(() => {
               showMessage("Yay!");
             }, 300);
-
+            win = true;
             addWin();
             saveData();
             clearTable();
@@ -13253,7 +13252,9 @@ function checkAnswer(activeTiles) {
           key.setAttribute("data-selected", "true");
         }
         unFreezeKeyboard(1400);
-        checkIfLost(matchCount);
+        /* See faierib viimase reaga */
+        //console.log(win);
+        checkIfLost(matchCount, win);
       },
       { once: true }
     );
@@ -13294,9 +13295,10 @@ function clearTable() {
   //startGame();
 }
 
-function checkIfLost(matchCount) {
+function checkIfLost(matchCount, win) {
+  console.log(win);
   const activeTiles = document.querySelectorAll('[data-tile-active="locked"]');
-  if (activeTiles.length == 30 && matchCount < 5) {
+  if (activeTiles.length == 30 && matchCount < 5 && win == false) {
     setTimeout(() => {
       showMessage(`Aww... Word was ${currentWord.toUpperCase()}`);
     }, 300);
