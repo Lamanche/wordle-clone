@@ -275,7 +275,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 1em;
+  margin: 1em 2em;
 }
 
 .wins,
@@ -295,7 +295,7 @@ body {
 }
 
 .player-list {
-  width: 11em;
+  width: 15em;
 }
 
 .list-item-container {
@@ -321,13 +321,13 @@ body {
 .list-item > h1 {
   font-size: 1.2em;
 
-  width: 70%;
-  margin-left: 0.6em;
+  width: 56%;
 }
 
 .list-item > p {
-  width: 15%;
+  width: 22%;
   font-size: 1.4em;
+  text-align: center;
 }
 
 .list-item > .first-h1 {
@@ -337,7 +337,6 @@ body {
 .list-item.first-list-item {
   cursor: default;
   box-shadow: none;
-  margin-left: 0.5em;
 }
 
 .list-item.first-list-item:hover {
@@ -347,11 +346,6 @@ body {
 
 .list-item > .first-p {
   font-size: 0.6em;
-  transform: translateX(-15%);
-}
-
-.list-item > .first-p-2 {
-  transform: translateX(-25%);
 }
 
 .highlighted-item {
@@ -535,4 +529,24 @@ svg {
 
 .visible {
   display: block;
+}
+
+@media (max-width: 550px) {
+  .header {
+    width: 100%;
+  }
+
+  .tiles-container {
+    grid-template-columns: repeat(5, 5em);
+    grid-auto-rows: 5em;
+  }
+
+  .keyboard {
+    grid-template-columns: repeat(20, 13%);
+    grid-auto-rows: 4em;
+  }
+
+  .stats-container {
+    font-size: 1.4em;
+  }
 }

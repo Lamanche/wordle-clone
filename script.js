@@ -3,7 +3,8 @@ import { saveData, loadData } from "./storage.js";
 
 let selectedLetters = [];
 
-let currentWord;
+//let currentWord;
+const currentWord = 'abcde'
 
 const wordList = [
   "cigar",
@@ -13026,7 +13027,9 @@ function unFreezeKeyboard(time) {
 
 function randomWord() {
   const random = Math.floor(Math.random() * 12975);
-  currentWord = wordList[random];
+  //currentWord = wordList[random];
+  
+  /*********** SPOILER ALERT ***********/
   console.log(currentWord);
 }
 
@@ -13166,6 +13169,7 @@ function submitAnswer() {
   freezeKeyboard();
 
   const activeTiles = document.querySelectorAll('[data-tile-active="true"]');
+  
   if (selectedLetters.length < 5) {
     showMessage("Not enough letters");
     activeTiles.forEach((tile) => tile.classList.add("error"));
@@ -13185,17 +13189,21 @@ function submitAnswer() {
       unFreezeKeyboard();
     }, 600);
 
-    return;
+    //return;
   } else if ((selectedLetters.length = 5)) {
     checkAnswer(activeTiles);
   }
 }
 
 function checkAnswer(activeTiles) {
-  const word = [...currentWord];
+  let word = [...currentWord];
   let matchCount = 0;
 
+  //console.log(word)
+  //console.log(selectedLetters)
+
   selectedLetters.forEach((letter, index) => {
+    //console.log(word)
     setTimeout(() => {
       activeTiles[index].classList.add("flip");
     }, (index * 500) / 2);
@@ -13205,31 +13213,39 @@ function checkAnswer(activeTiles) {
       () => {
         activeTiles[index].classList.remove("flip");
         activeTiles[index].dataset.tileActive = "locked";
+        
         if (word[index].toLowerCase() === letter.toLowerCase()) {
           activeTiles[index].classList.add("match");
           const key = document.querySelector(`[data-key='${letter}'i]`);
           key.classList.add("match");
           key.setAttribute("data-selected", "true");
           matchCount++;
+
+          word.splice(index, 1, '')
+          //console.log(word)
+          
           if (matchCount == 5) {
             matchCount = 0;
             selectedLetters = [];
             setTimeout(() => {
               showMessage("Yay!");
             }, 300);
-
+            
             addWin();
             saveData();
             clearTable();
 
-            return;
+            //return;
           }
-          return;
-        } else if (currentWord.includes(letter.toLowerCase())) {
+          //return;
+        } else if (word.includes(letter.toLowerCase())) {
           activeTiles[index].classList.add("includes");
           const key = document.querySelector(`[data-key='${letter}'i]`);
           key.classList.add("includes");
           key.setAttribute("data-selected", "true");
+
+          //word.splice(word.indexOf(letter), 1, '')
+          //console.log(word.indexOf())
         } else {
           activeTiles[index].classList.add("dont-include");
           const key = document.querySelector(`[data-key='${letter}'i]`);
@@ -13237,14 +13253,13 @@ function checkAnswer(activeTiles) {
           key.setAttribute("data-selected", "true");
         }
         unFreezeKeyboard(1400);
-
         checkIfLost(matchCount);
       },
       { once: true }
     );
   });
-
   selectedLetters = [];
+  //console.log(word)
 }
 
 function showMessage(m) {
