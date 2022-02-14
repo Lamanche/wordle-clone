@@ -13298,7 +13298,7 @@ function checkIfLost(matchCount) {
   const activeTiles = document.querySelectorAll('[data-tile-active="locked"]');
   if (activeTiles.length == 30 && matchCount < 5) {
     setTimeout(() => {
-      showMessage("Aww.. lost!");
+      showMessage(`Aww... Word was ${currentWord.toUpperCase()}`);
     }, 300);
 
     addLoss();
