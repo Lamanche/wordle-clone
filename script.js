@@ -3,8 +3,8 @@ import { saveData, loadData } from "./storage.js";
 
 let selectedLetters = [];
 
-//let currentWord;
-const currentWord = 'abcde'
+let currentWord;
+//const currentWord = 'abcde'
 
 const wordList = [
   "cigar",
@@ -13027,8 +13027,8 @@ function unFreezeKeyboard(time) {
 
 function randomWord() {
   const random = Math.floor(Math.random() * 12975);
-  //currentWord = wordList[random];
-  
+  currentWord = wordList[random];
+
   /*********** SPOILER ALERT ***********/
   console.log(currentWord);
 }
@@ -13169,7 +13169,7 @@ function submitAnswer() {
   freezeKeyboard();
 
   const activeTiles = document.querySelectorAll('[data-tile-active="true"]');
-  
+
   if (selectedLetters.length < 5) {
     showMessage("Not enough letters");
     activeTiles.forEach((tile) => tile.classList.add("error"));
@@ -13213,7 +13213,7 @@ function checkAnswer(activeTiles) {
       () => {
         activeTiles[index].classList.remove("flip");
         activeTiles[index].dataset.tileActive = "locked";
-        
+
         if (word[index].toLowerCase() === letter.toLowerCase()) {
           activeTiles[index].classList.add("match");
           const key = document.querySelector(`[data-key='${letter}'i]`);
@@ -13221,16 +13221,16 @@ function checkAnswer(activeTiles) {
           key.setAttribute("data-selected", "true");
           matchCount++;
 
-          word.splice(index, 1, '')
+          word.splice(index, 1, "");
           //console.log(word)
-          
+
           if (matchCount == 5) {
             matchCount = 0;
             selectedLetters = [];
             setTimeout(() => {
               showMessage("Yay!");
             }, 300);
-            
+
             addWin();
             saveData();
             clearTable();

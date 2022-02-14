@@ -539,17 +539,17 @@ svg {
 
   .tiles-container {
     font-size: 1.4em;
-    /*grid-template-columns: repeat(5, 5em);
-    grid-auto-rows: 5em;*/
   }
 
   .keyboard {
     font-size: 1.4em;
-    /*grid-template-columns: repeat(20, 13%);
-    grid-auto-rows: 4em;*/
   }
 
   .stats-container {
+    font-size: 1.4em;
+  }
+
+  .message-container {
     font-size: 1.4em;
   }
 }
