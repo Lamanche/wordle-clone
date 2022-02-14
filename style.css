@@ -534,16 +534,19 @@ svg {
 @media (max-width: 550px) {
   .header {
     width: 100%;
+    font-size: 1.4em;
   }
 
   .tiles-container {
-    grid-template-columns: repeat(5, 5em);
-    grid-auto-rows: 5em;
+    font-size: 1.4em;
+    /*grid-template-columns: repeat(5, 5em);
+    grid-auto-rows: 5em;*/
   }
 
   .keyboard {
-    grid-template-columns: repeat(20, 13%);
-    grid-auto-rows: 4em;
+    font-size: 1.4em;
+    /*grid-template-columns: repeat(20, 13%);
+    grid-auto-rows: 4em;*/
   }
 
   .stats-container {
