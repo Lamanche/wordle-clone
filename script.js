@@ -4,7 +4,6 @@ import { saveData, loadData } from "./storage.js";
 let selectedLetters = [];
 
 let currentWord;
-//const currentWord = 'abcde'
 
 const wordList = [
   "cigar",
@@ -13030,7 +13029,7 @@ function randomWord() {
   currentWord = wordList[random];
 
   /*********** SPOILER ALERT ***********/
-  console.log(currentWord);
+  //console.log(currentWord);
 }
 
 function openStats() {
@@ -13184,7 +13183,7 @@ function submitAnswer() {
 
     setTimeout(() => {
       unFreezeKeyboard();
-    }, 600);
+    }, 300);
 
     //return;
   } else if ((selectedLetters.length = 5)) {
@@ -13193,16 +13192,12 @@ function submitAnswer() {
 }
 
 function checkAnswer(activeTiles) {
-  let word = [...currentWord];
-  let matchCount = 0;
-  let win = false;
-
-  //console.log(win)
-  //console.log(word)
-  //console.log(selectedLetters)
+  const { validatedAnswer, hitCount } = validateAnswer(
+    currentWord,
+    selectedLetters
+  );
 
   selectedLetters.forEach((letter, index) => {
-    //console.log(word)
     setTimeout(() => {
       activeTiles[index].classList.add("flip");
     }, (index * 500) / 2);
@@ -13213,54 +13208,80 @@ function checkAnswer(activeTiles) {
         activeTiles[index].classList.remove("flip");
         activeTiles[index].dataset.tileActive = "locked";
 
-        if (word[index].toLowerCase() === letter.toLowerCase()) {
+        if (validatedAnswer[index] === "green") {
           activeTiles[index].classList.add("match");
           const key = document.querySelector(`[data-key='${letter}'i]`);
           key.classList.add("match");
           key.setAttribute("data-selected", "true");
-          matchCount++;
-
-          word.splice(index, 1, "");
-          //console.log(word)
-
-          if (matchCount == 5) {
-            matchCount = 0;
-            selectedLetters = [];
-            setTimeout(() => {
-              showMessage("Yay!");
-            }, 300);
-            win = true;
-            addWin();
-            saveData();
-            clearTable();
-
-            //return;
-          }
-          //return;
-        } else if (word.includes(letter.toLowerCase())) {
+        } else if (validatedAnswer[index] === "yellow") {
           activeTiles[index].classList.add("includes");
           const key = document.querySelector(`[data-key='${letter}'i]`);
           key.classList.add("includes");
           key.setAttribute("data-selected", "true");
-
-          //word.splice(word.indexOf(letter), 1, '')
-          //console.log(word.indexOf())
-        } else {
+        } else if (validatedAnswer[index] === "gray") {
           activeTiles[index].classList.add("dont-include");
           const key = document.querySelector(`[data-key='${letter}'i]`);
           key.classList.add("dont-include");
           key.setAttribute("data-selected", "true");
         }
-        unFreezeKeyboard(1400);
-        /* See faierib viimase reaga */
-        //console.log(win);
-        checkIfLost(matchCount, win);
       },
       { once: true }
     );
   });
+
+  setTimeout(() => {
+    const lockedTiles = document.querySelectorAll(
+      '[data-tile-active="locked"]'
+    );
+
+    if (hitCount === 5) {
+      selectedLetters = [];
+      showMessage("Yay!");
+      addWin();
+      saveData();
+      clearTable();
+    } else if (lockedTiles.length == 30 && hitCount < 5) {
+      showMessage(`Aww... Word was ${currentWord.toUpperCase()}`);
+      addLoss();
+      saveData();
+      clearTable();
+    } else {
+      unFreezeKeyboard(0);
+    }
+  }, 1300);
+
   selectedLetters = [];
-  //console.log(word)
+}
+
+export function validateAnswer(currentWord, selectedLetters) {
+  const validatedAnswer = ["", "", "", "", ""];
+  const word = [...currentWord];
+  const guess = [...selectedLetters];
+  let hitCount = 0;
+
+  guess.forEach((letter, index) => {
+    if (letter.toLowerCase() === word[index]) {
+      validatedAnswer[index] = "green";
+      word[index] = "";
+      guess[index] = "";
+      hitCount++;
+    }
+  });
+
+  guess.forEach((letter, index) => {
+    if (letter !== "") {
+      if (word.includes(letter.toLowerCase())) {
+        validatedAnswer[index] = "yellow";
+        word[word.indexOf(letter.toLowerCase())] = "";
+        guess[index] = "";
+      } else {
+        validatedAnswer[index] = "gray";
+        guess[index] = "";
+      }
+    }
+  });
+
+  return { validatedAnswer, hitCount };
 }
 
 function showMessage(m) {
@@ -13291,22 +13312,6 @@ function clearTable() {
     });
     startGame();
   }, 1800);
-
-  //startGame();
-}
-
-function checkIfLost(matchCount, win) {
-  console.log(win);
-  const activeTiles = document.querySelectorAll('[data-tile-active="locked"]');
-  if (activeTiles.length == 30 && matchCount < 5 && win == false) {
-    setTimeout(() => {
-      showMessage(`Aww... Word was ${currentWord.toUpperCase()}`);
-    }, 300);
-
-    addLoss();
-    saveData();
-    clearTable();
-  }
 }
 
 function retry() {
