@@ -186,6 +186,12 @@ body {
   letter-spacing: 0.25em;
 }
 
+.span {
+  font-size: 0.7em;
+  text-transform: lowercase;
+  letter-spacing: normal;
+}
+
 .statistics-btn {
   position: absolute;
   right: 0.25em;
