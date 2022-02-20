@@ -13029,7 +13029,7 @@ function randomWord() {
   currentWord = wordList[random];
 
   /*********** SPOILER ALERT ***********/
-  //console.log(currentWord);
+  console.log(currentWord);
 }
 
 function openStats() {
